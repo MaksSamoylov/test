@@ -1,0 +1,25 @@
+{
+  "cookies": [
+    {
+      "name": "cookie-accepted",
+      "value": "1",
+      "domain": "faphouse.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "aged-enough",
+      "value": "1",
+      "domain": "faphouse.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}
