@@ -1,12 +1,12 @@
 import { Page, expect } from '@playwright/test';
+import { BaseComponent } from './BaseComponent';
 
-export class ThumbsListComponent {
+export class ThumbsListComponent extends BaseComponent {
   private thumbs = '[data-el="ThumbsList"] .thumb';
 
-  constructor(private readonly page: Page) {}
-
   async expectThumbsCount(expectedCount: number): Promise<void> {
-    await expect(this.page.locator(this.thumbs)).toHaveCount(expectedCount);
+    await expect(this.page.locator(this.thumbs), "Thumbs list should have correct count")
+    .toHaveCount(expectedCount);
   }
 
   async expectUniqueThumbs(): Promise<void> {
@@ -16,8 +16,14 @@ export class ThumbsListComponent {
   }
 
   private async getThumbIds(): Promise<string[]> {
-    return this.page.locator(this.thumbs).evaluateAll((elements) =>
-      elements.map((element) => element.getAttribute('data-id')!)
+    const thumbs = await this.page.locator(this.thumbs).all();
+    return Promise.all(
+      thumbs.map(thumb => 
+        thumb.getAttribute('data-id').then(id => {
+          if (!id) throw new Error('Thumbnail element found without data-id attribute');
+          return id;
+        })
+      )
     );
   }
 }

@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 
-dotenv.config(); // Загружает переменные из .env
+dotenv.config();
 
 export const config = {
   baseURL: process.env.BASE_URL || 'https://faphouse.com',

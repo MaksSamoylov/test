@@ -1,14 +1,18 @@
 import { Page } from "@playwright/test";
 import { ThumbsListComponent } from "./components/ThumbnailsComponent";
+import { BasePage } from "./BasePage";
 
-export class SearchResultsPage {
-    public thumbsList: ThumbsListComponent;
+export class SearchResultsPage extends BasePage {
+    private titleSelector = 'h1.title';
 
-    constructor(private page: Page) {
-        this.thumbsList = new ThumbsListComponent(page);
+    public thumbsListComponent: ThumbsListComponent;
+
+    constructor(page: Page) {
+        super(page);
+        this.thumbsListComponent = new ThumbsListComponent(page);
     }
 
     public async waitPageLoaded(expectedTitle: string): Promise<void> {
-        await this.page.locator(`h1.title:has-text("${expectedTitle}")`).waitFor({ state: 'visible' });
+        await super.waitPageLoaded(this.titleSelector, expectedTitle);
     }
 }

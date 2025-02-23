@@ -1,10 +1,8 @@
-import { Page } from '@playwright/test';
-import { ECategory } from '../../types/category';
+import { ECategory } from '../../constants/category';
+import { BaseComponent } from './BaseComponent';
 
-export class HeaderComponent {
+export class HeaderComponent extends BaseComponent {
   private searchInput = 'div[class*="top-desktop"] input.text-input__input';
-
-  constructor(private readonly page: Page) {}
 
   async searchCategory(category: ECategory) {
     await this.page.locator(this.searchInput).waitFor({ state: 'visible' });

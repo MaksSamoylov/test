@@ -1,14 +1,12 @@
 import { Page } from '@playwright/test';
-import { ThumbsListComponent } from './components/ThumbnailsComponent';
+import { BasePage } from './BasePage';
+import { HeaderComponent } from './components/HeaderComponent';
 
-export class HomePage {
-    public thumbsList: ThumbsListComponent;
+export class HomePage extends BasePage {
+    public headerComponent: HeaderComponent;
 
-    constructor(private readonly page: Page) {
-        this.thumbsList = new ThumbsListComponent(page);
-    }
-
-    public async open(): Promise<void> {
-        await this.page.goto('/');
+    constructor(page: Page) {
+        super(page);
+        this.headerComponent = new HeaderComponent(page);
     }
 }
